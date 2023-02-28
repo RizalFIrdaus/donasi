@@ -18,5 +18,8 @@ Route::get("/", function () {
 });
 
 Route::get("/user/login", function () {
-    return view("Akun.index");
+    return view("Akun.login");
+});
+Route::get("/user/register", function () {
+    return view("Akun.register");
 });
