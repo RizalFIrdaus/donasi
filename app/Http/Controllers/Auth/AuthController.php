@@ -15,14 +15,23 @@ class AuthController extends Controller
     {
     }
 
-    public function login(LoginFormRequest $request)
+    public function login()
     {
-        $request->validated();
+        return view("Akun.login");
     }
 
     public function register()
     {
         return view("Akun.register");
+    }
+
+    public function doLogin(LoginFormRequest $request)
+    {
+        $request->validated();
+        if ($this->authService->login($request)) {
+            return redirect("/");
+        }
+        return redirect()->back()->with("failed", "Email atau password salah!");
     }
 
     public function doRegister(RegisterFormRequest $request)
