@@ -11,8 +11,17 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthServiceImp implements AuthService
 {
-    public function login(LoginFormRequest $request)
+    public function login(LoginFormRequest $request): bool
     {
+        $user = User::where("email", $request->input("email"))->first();
+        if ($user) {
+            if (Hash::check($request->input("password"), $user->password)) {
+                $token = $user->createToken("ac." . $request->email . ".xz");
+
+                return true;
+            }
+        }
+        return false;
     }
     public function register(RegisterFormRequest $request)
     {
