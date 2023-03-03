@@ -7,7 +7,7 @@ use App\Http\Requests\RegisterFormRequest;
 
 interface AuthService
 {
-    public function login(LoginFormRequest $request): bool;
+    public function login(LoginFormRequest $request, array $credential): bool;
     public function register(RegisterFormRequest $request);
     public function logout();
 }

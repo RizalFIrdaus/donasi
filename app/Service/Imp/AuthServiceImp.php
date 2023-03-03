@@ -7,21 +7,28 @@ use App\Models\User;
 use App\Service\AuthService;
 use App\Http\Requests\LoginFormRequest;
 use App\Http\Requests\RegisterFormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthServiceImp implements AuthService
 {
-    public function login(LoginFormRequest $request): bool
+    public function login(LoginFormRequest $request, array $credential): bool
     {
-        $user = User::where("email", $request->input("email"))->first();
-        if ($user) {
-            if (Hash::check($request->input("password"), $user->password)) {
-                $token = $user->createToken("ac." . $request->email . ".xz");
 
-                return true;
-            }
+        if (Auth::attempt($credential)) {
+            $request->session()->regenerate();
+            return true;
         }
         return false;
+
+        // $user = User::where("email", $request->input("email"))->first();
+        // if ($user) {
+        //     if (Hash::check($request->input("password"), $user->password)) {
+        //         $request->session()->regenerate();
+        //         return true;
+        //     }
+        // }
+        // return false;
     }
     public function register(RegisterFormRequest $request)
     {

@@ -7,6 +7,7 @@ use App\Http\Requests\LoginFormRequest;
 use App\Http\Requests\RegisterFormRequest;
 use App\Service\AuthService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -27,8 +28,8 @@ class AuthController extends Controller
 
     public function doLogin(LoginFormRequest $request)
     {
-        $request->validated();
-        if ($this->authService->login($request)) {
+        $credential = $request->validated();
+        if ($this->authService->login($request, $credential)) {
             return redirect("/");
         }
         return redirect()->back()->with("failed", "Email atau password salah!");
