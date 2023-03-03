@@ -17,9 +17,19 @@
           <li>
             <a href="#" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-teal-700 md:p-0 ">Donasi</a>
           </li>
+          @if (Auth::user())
           <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-teal-700 md:p-0 ">Akun</a>
+            <form action="{{ route("logout") }}" method="POST">
+              @csrf
+              <button class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-teal-700 md:p-0 " type="submit">{{ Auth::user()->name }}</button>
+            </form>
           </li>
+          @else
+          <li>
+            <a href="{{ route("login") }}" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-teal-700 md:p-0 ">Akun</a>
+          </li>
+          @endif
+         
         </ul>
       </div>
     </div>

@@ -28,8 +28,10 @@ class AuthController extends Controller
 
     public function doLogin(LoginFormRequest $request)
     {
+
         $credential = $request->validated();
-        if ($this->authService->login($request, $credential)) {
+        $remember = $request->has("remember");
+        if ($this->authService->login($request, $credential, $remember)) {
             return redirect("/");
         }
         return redirect()->back()->with("failed", "Email atau password salah!");
@@ -39,6 +41,14 @@ class AuthController extends Controller
     {
         $request->validated();
         $this->authService->register($request);
+        return redirect()->route("login");
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect()->route("login");
     }
 }

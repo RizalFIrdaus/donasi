@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get("/", function () {
     return view("Beranda.index");
 })->middleware("auth");
+Route::middleware("auth")->group(function () {
+    Route::post("/user/logout", [AuthController::class, "logout"])->name("logout");
+});
+
 Route::middleware("guest")->controller(AuthController::class)->group(function () {
     Route::get("/user/login",  "login")->name("login");
     Route::post("/user/login",  "doLogin")->name("doLogin");

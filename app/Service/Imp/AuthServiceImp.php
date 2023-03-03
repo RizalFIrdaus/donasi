@@ -12,23 +12,14 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthServiceImp implements AuthService
 {
-    public function login(LoginFormRequest $request, array $credential): bool
+    public function login(LoginFormRequest $request, array $credential, bool $remember): bool
     {
 
-        if (Auth::attempt($credential)) {
+        if (Auth::attempt($credential, $remember)) {
             $request->session()->regenerate();
             return true;
         }
         return false;
-
-        // $user = User::where("email", $request->input("email"))->first();
-        // if ($user) {
-        //     if (Hash::check($request->input("password"), $user->password)) {
-        //         $request->session()->regenerate();
-        //         return true;
-        //     }
-        // }
-        // return false;
     }
     public function register(RegisterFormRequest $request)
     {
