@@ -15,4 +15,8 @@ class ProfileController extends Controller
     {
         return view("Akun.account");
     }
+    public function email()
+    {
+        return view("Akun.email");
+    }
 }
