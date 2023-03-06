@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("user_id");
             $table->string("fullname");
-            $table->string("photo");
+            $table->string("file_photo");
+            $table->string("photo", 1000);
             $table->string("gender");
             $table->date("birthday");
             $table->string("number_phone");

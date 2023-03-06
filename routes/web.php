@@ -20,6 +20,7 @@ Route::get("/", function () {
 });
 Route::middleware("auth")->group(function () {
     Route::get("/user/profil", [ProfileController::class, "profile"])->name("change-profile");
+    Route::post("/user/profil", [ProfileController::class, "updateProfile"])->name("update-profile");
     Route::get("/user/account", [ProfileController::class, "account"])->name("change-personal-account");
     Route::get("/user/account/email", [ProfileController::class, "email"])->name("change-email");
     Route::get("/user/account/password", [ProfileController::class, "password"])->name("change-password");
