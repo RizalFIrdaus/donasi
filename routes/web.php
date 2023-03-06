@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Akun\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,10 @@ Route::get("/", function () {
     return view("Beranda.index");
 });
 Route::middleware("auth")->group(function () {
+    Route::get("/user/profil", [ProfileController::class, "profile"])->name("change-profile");
+    Route::get("/user/account", [ProfileController::class, "account"])->name("change-personal-account");
+    Route::get("/user/account/email", [ProfileController::class, "email"])->name("change-email");
+    Route::get("/user/account/password", [ProfileController::class, "password"])->name("change-password");
     Route::post("/user/logout", [AuthController::class, "logout"])->name("logout");
 });
 
