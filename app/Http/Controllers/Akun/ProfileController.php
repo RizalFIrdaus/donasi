@@ -11,6 +11,12 @@ class ProfileController extends Controller
     {
         return view("Akun.profile");
     }
+
+    public function updateProfile()
+    {
+        
+    }
+
     public function account()
     {
         return view("Akun.account");
