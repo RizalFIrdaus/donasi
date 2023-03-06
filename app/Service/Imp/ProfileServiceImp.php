@@ -8,6 +8,7 @@ use App\Service\ProfileService;
 use Illuminate\Support\Facades\Auth;
 use Google\Cloud\Storage\StorageClient;
 use App\Http\Requests\ProfileFormRequest;
+use App\Models\SocialMedia;
 
 class ProfileServiceImp implements ProfileService
 {
@@ -47,5 +48,16 @@ class ProfileServiceImp implements ProfileService
         } else {
             $profile->update();
         }
+
+        $socialmedia = SocialMedia::where("user_id", Auth::user()->id)->first();
+        if (!$socialmedia) {
+            $socialmedia = new SocialMedia();
+        }
+        $socialmedia->user_id = Auth::user()->id;
+        $socialmedia->instagram = $request->input("instagram");
+        $socialmedia->facebook = $request->input("facebook");
+        $socialmedia->twitter = $request->input("twitter");
+        $socialmedia->tiktok = $request->input("tiktok");
+        $socialmedia->save();
     }
 }

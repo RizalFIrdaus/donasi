@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Akun;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileFormRequest;
 use App\Models\Profile;
+use App\Models\SocialMedia;
 use App\Service\ProfileService;
-use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -17,7 +17,8 @@ class ProfileController extends Controller
     public function profile()
     {
         $profile = Profile::where("user_id", Auth()->user()->id)->first();
-        return view("Akun.profile", compact("profile"));
+        $socialmedia = SocialMedia::where("user_id", Auth()->user()->id)->first();
+        return view("Akun.profile", compact("profile", "socialmedia"));
     }
 
     public function updateProfile(ProfileFormRequest $request)

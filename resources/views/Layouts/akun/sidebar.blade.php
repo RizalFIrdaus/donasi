@@ -5,7 +5,9 @@
             Profile
         </a>
         <button type="button" class="relative inline-flex items-center w-full px-4 py-2 text-sm font-medium border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
-            <svg aria-hidden="true" class="w-10 h-8 mr-4 fill-current" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path></svg>
+            <svg aria-hidden="true" class="w-10 h-8 mr-4 fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M20.375,4.75H17.625v-2h-2v2h-6V2.75h-2v2h-2.75a.75.75,0,0,0-.75.75v2.5a.75.75,0,0,0,.75.75h.75v9.5a2.25,2.25,0,0,0,2.25,2.25h9.5a2.25,2.25,0,0,0,2.25-2.25v-9.5h.75a.75.75,0,0,0,.75-.75v-2.5A.75.75,0,0,0,20.375,4.75Zm-11,8.25H7.875V10.125h1.5Zm3,0H10.875V10.125h1.5Zm3,0H13.875V10.125h1.5Zm3,0H16.875V10.125h1.5Zm0-3.75H7.875V6.625h10.5Zm3-1.5H18.375V5.5h-1.5v-1h-2v1h-6v-1h-2v1h-1.5v1.25h0a.75.75,0,0,0-.75.75v1.5a.75.75,0,0,0,.75.75h.75v6.5a1.5,1.5,0,0,1-1.5,1.5h-9.5a1.5,1.5,0,0,1-1.5-1.5v-6.5h.75a.75.75,0,0,0,.75-.75v-1.5a.75.75,0,0,0-.75-.75h-1.5V5.5H2.625v2h-1.5a.75.75,0,0,0-.75.75v2.5a.75.75,0,0,0,.75.75h1.5v8.25a3,3,0,0,0,3,3h9.5a3,3,0,0,0,3-3v-8.25h1.5a.75.75,0,0,0,.75-.75v-2.5A.75.75,0,0,0,20.375,8.25Z" />
+              </svg>
             Donasi
         </button>
         <button type="button" class="relative inline-flex items-center w-full px-4 py-2 text-sm font-medium border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
