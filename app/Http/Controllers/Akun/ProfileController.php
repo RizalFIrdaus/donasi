@@ -19,4 +19,8 @@ class ProfileController extends Controller
     {
         return view("Akun.email");
     }
+    public function password()
+    {
+        return view("Akun.password");
+    }
 }
