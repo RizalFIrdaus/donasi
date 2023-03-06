@@ -29,6 +29,7 @@ class AuthServiceImp implements AuthService
             $user->email = $request->input("email");
             $user->password = Hash::make($request->input("password"));
             $user->save();
+            return $user;
         } catch (Exception $error) {
             return $error->getMessage();
         }

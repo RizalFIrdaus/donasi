@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Service\AuthService;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -42,5 +43,20 @@ class AuthServiceTest extends TestCase
         ]);
 
         $response->assertRedirect("/user/login");
+    }
+
+    public function testLoginSuccess()
+    {
+        $response = $this->get("/user/login");
+        $response->assertSeeText("Donasi");
+    }
+
+    public function testDoLoginSuccess()
+    {
+        $response = $this->post("/user/login", [
+            "email" => "rizal.firdaus117@gmail.com",
+            "password" => "Preskot_117"
+        ]);
+        $response->assertRedirect("/");
     }
 }
