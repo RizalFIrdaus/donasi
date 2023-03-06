@@ -28,7 +28,6 @@ class AuthController extends Controller
 
     public function doLogin(LoginFormRequest $request)
     {
-
         $credential = $request->validated();
         $remember = $request->has("remember");
         if ($this->authService->login($request, $credential, $remember)) {
