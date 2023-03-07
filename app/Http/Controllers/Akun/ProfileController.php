@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Akun;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ProfileFormRequest;
+use App\Models\User;
 use App\Models\Profile;
 use App\Models\SocialMedia;
-use App\Models\User;
-use App\Service\ProfileService;
 use Illuminate\Http\Request;
+use App\Service\ProfileService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\ProfileFormRequest;
+use App\Http\Requests\PasswordFormRequest;
 
 class ProfileController extends Controller
 {
@@ -62,5 +64,21 @@ class ProfileController extends Controller
     public function password()
     {
         return view("Akun.password");
+    }
+
+    public function updatePassword(PasswordFormRequest $request)
+    {
+        $user = User::where("email", Auth::user()->email)->first();
+        if (!$user)
+            return redirect()->back()->withErrors(["error" => "Email tidak terdaftar"]);
+        if (Hash::check($request->input("old_password"), $user->password)) {
+            if ($request->input("new_password") == $request->input("renew_password")) {
+                $user->password = Hash::make($request->input("new_password"));
+                $user->update();
+                return redirect()->route("change-personal-account")->with("message", "Password berhasil diubah");
+            }
+            return redirect()->back()->withErrors(["error" => "Password baru kamu tidak cocok dengan pengulangan password baru mu"]);
+        }
+        return redirect()->back()->withErrors(["error" => "Password kamu salah"]);
     }
 }
