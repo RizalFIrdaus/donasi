@@ -6,6 +6,14 @@
 @include('Layouts.akun.sidebar')
 
 <div class="ml-6 w-full">
+    
+    @if (Session::has("message"))
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+        <ul class="list-disc list-inside">
+                <li>{{ Session::get("message") }}</li>
+        </ul>
+    </div>
+    @endif
     @if ($errors->any())
     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
         <ul class="list-disc list-inside">
@@ -17,7 +25,7 @@
 @endif
     <form action="{{ route("update-profile") }}" method="POST" enctype="multipart/form-data">
     @csrf
-    <p class="font-semibold text-[24px]">Ubah Profil</p>
+    <p class="font-semibold text-[24px] mt-6">Ubah Profil</p>
     <p class="font-light text-[18px]">Isi biodata dengan benar</p>
     <div class="mt-6">
         <p class="font-normal text-[20px]">Foto</p>

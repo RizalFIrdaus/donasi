@@ -4,7 +4,14 @@
 <div class="flex flex-row">
 @include('Layouts.akun.sidebar')
 <div class="ml-6 w-full">
-    <p class="font-semibold text-[24px]">Setelan Akun</p>
+    @if (Session::has("message"))
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+        <ul class="list-disc list-inside">
+                <li>{{ Session::get("message") }}</li>
+        </ul>
+    </div>
+    @endif
+    <p class="font-semibold text-[24px] mt-6">Setelan Akun</p>
     <p class="font-light text-[18px]">Data privasi akunmu</p>
     <div class="flex items-center justify-between">
         <div class="mt-6 w-3/4">
