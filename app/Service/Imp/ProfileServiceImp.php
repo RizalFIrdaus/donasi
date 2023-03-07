@@ -2,13 +2,17 @@
 
 namespace App\Service\Imp;
 
+use App\Http\Requests\PasswordFormRequest;
+use App\Models\User;
 use App\Models\Profile;
+use App\Models\SocialMedia;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Service\ProfileService;
 use Illuminate\Support\Facades\Auth;
 use Google\Cloud\Storage\StorageClient;
 use App\Http\Requests\ProfileFormRequest;
-use App\Models\SocialMedia;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileServiceImp implements ProfileService
 {
@@ -59,5 +63,20 @@ class ProfileServiceImp implements ProfileService
         $socialmedia->twitter = $request->input("twitter");
         $socialmedia->tiktok = $request->input("tiktok");
         $socialmedia->save();
+    }
+
+    public function updatePassword(PasswordFormRequest $request)
+    {
+        $user = User::where("email", Auth::user()->email)->first();
+        if (!$user)
+            return redirect()->back()->withErrors(["error" => "Email tidak terdaftar"]);
+        if (Hash::check($request->input("old_password"), $user->password)) {
+            if ($request->input("new_password") == $request->input("renew_password")) {
+                $user->password = Hash::make($request->input("new_password"));
+                return redirect()->route("change-personal-account")->with("message", "Password berhasil diubah");
+            }
+            return redirect()->back()->withErrors(["error" => "Password baru kamu tidak cocok dengan pengulangan password baru mu"]);
+        }
+        return redirect()->back()->withErrors(["error" => "Password kamu salah"]);
     }
 }
