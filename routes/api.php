@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Akun\ProfileController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware("auth:sanctum")->group(function () {
     Route::post('/user/logout', [AuthController::class, 'Logout']);
+    Route::post('/user/profil', [ProfileController::class, 'updateProfile']);
+    Route::post('/user/account/email', [ProfileController::class, 'updateEmail']);
+    Route::post('/user/account/password', [ProfileController::class, 'updatePassword']);
 });
 
 Route::post('/user/register', [AuthController::class, 'Register']);

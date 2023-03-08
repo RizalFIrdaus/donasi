@@ -9,5 +9,6 @@ use Illuminate\Http\Request;
 interface ProfileService
 {
     public function storeProfile(ProfileFormRequest $request);
+    public function apiStoreProfile(ProfileFormRequest $request);
     public function updatePassword(PasswordFormRequest $request);
 }
