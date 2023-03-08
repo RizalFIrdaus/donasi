@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Akun\ProfileController;
+use App\Http\Controllers\Beranda\DonasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,9 @@ use App\Http\Controllers\Akun\ProfileController;
 |
 */
 
-Route::get("/", function () {
-    return view("Beranda.index");
+Route::controller(DonasiController::class)->group(function () {
+    Route::get("/", "index");
+    Route::get("/galang-dana", "galangdana")->name("galang-dana")->middleware("auth");
 });
 Route::middleware("auth")->group(function () {
     Route::get("/user/profil", [ProfileController::class, "profile"])->name("change-profile");
