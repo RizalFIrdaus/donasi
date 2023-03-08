@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Akun\ProfileController;
 use App\Http\Controllers\Beranda\DonasiController;
+use App\Http\Controllers\Beranda\GalangDanaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,15 @@ use App\Http\Controllers\Beranda\DonasiController;
 
 Route::controller(DonasiController::class)->group(function () {
     Route::get("/", "index");
-    Route::get("/galang-dana", "galangdana")->name("galang-dana")->middleware("auth");
+    Route::get("/campaign", "galangdana")->name("galang-dana")->middleware("auth");
+});
+
+Route::controller(GalangDanaController::class)->middleware("auth")->group(function () {
+    Route::get("/campaign/medical/step1", "step1")->name("step1.medical.pasien");
+    Route::post("/campaign/medical/step1", "storeStep1")->name("store.step1.medical.pasien");
+    Route::get("/campaign/medical/step2", "step2")->name("step2.medical.tujuan");
+    Route::post("/campaign/medical/step2", "storeStep2")->name("store.step2.medical.tujuan");
+    Route::get("/campaign/medical/step3", "step3")->name("step3.medical.riwayatmedis");
 });
 Route::middleware("auth")->group(function () {
     Route::get("/user/profil", [ProfileController::class, "profile"])->name("change-profile");
