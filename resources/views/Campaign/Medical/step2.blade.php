@@ -4,7 +4,7 @@
 <div class="container mt-24 mx-auto px-20">
     <div class="text-center">
         <p class="text-[32px] font-semibold">Bantuan Medis dan Kesehatan.</p>
-        <p class="text-[20px] font-light mt-6">Tujuan Data</p>
+        <p class="text-[20px] font-light mt-6">Data Pasien</p>
         <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700 mt-2">
             <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
                 style="width: 20%"> 20%</div>
@@ -26,7 +26,7 @@
         <label for="user_phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Ponsel Kamu</label>
         <input type="text" name="user_phone" id="user_phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Pastikan aktif untuk sms" value="{{ Session::has("step2")? Session::get("step2")["user_phone"]:""}}" >
     </div>
-    @if (Session::get("step1")["pasien"]=="4")
+    @if (Session::has("step1")&&Session::get("step1")["pasien"]=="4")
     <div class="mb-6">
         <label for="patient_phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Ponsel Pasien</label>
         <input type="text" name="patient_phone" id="patient_phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Pastikan aktif untuk sms" value="{{ Session::has("step2")? Session::get("step2")["patient_phone"]:""}}" >

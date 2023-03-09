@@ -28,6 +28,13 @@ Route::controller(GalangDanaController::class)->middleware("auth")->group(functi
     Route::get("/campaign/medical/step2", "step2")->name("step2.medical.tujuan");
     Route::post("/campaign/medical/step2", "storeStep2")->name("store.step2.medical.tujuan");
     Route::get("/campaign/medical/step3", "step3")->name("step3.medical.riwayatmedis");
+    Route::post("/campaign/medical/step3", "storeStep3")->name("store.step3.medical.riwayatmedis");
+    Route::get("/campaign/medical/step4", "step4")->name("step4.medical.targetdonasi");
+    Route::post("/campaign/medical/step4", "storeStep4")->name("store.step4.medical.targetdonasi");
+    Route::get("/campaign/medical/step5", "step5")->name("step5.medical.judul");
+    Route::post("/campaign/medical/step5", "storeStep5")->name("store.step5.medical.judul");
+    Route::get("/campaign/medical/review", "review")->name("review.medical");
+    Route::post("/campaign/medical/review", "finalReview")->name("post.review.medical");
 });
 Route::middleware("auth")->group(function () {
     Route::get("/user/profil", [ProfileController::class, "profile"])->name("change-profile");

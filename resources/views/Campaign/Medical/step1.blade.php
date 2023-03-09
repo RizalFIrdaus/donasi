@@ -4,7 +4,7 @@
 <div class="container mt-24 mx-auto px-20">
     <div class="text-center">
         <p class="text-[32px] font-semibold">Bantuan Medis dan Kesehatan.</p>
-        <p class="text-[20px] font-light mt-6">Data Pasien</p>
+        <p class="text-[20px] font-light mt-6">Status Pasien</p>
         <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700 mt-2">
             <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
                 style="width: 0%"> 0%</div>
