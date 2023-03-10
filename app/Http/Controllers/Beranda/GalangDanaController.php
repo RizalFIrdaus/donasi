@@ -158,31 +158,8 @@ class GalangDanaController extends Controller
 
     public function finalReview(Request $request)
     {
-        $step1 = $request->session()->get('step1');
-        $step2 = $request->session()->get('step2');
-        $step3 = $request->session()->get('step3');
-        $step4 = $request->session()->get('step4');
-        $step5 = $request->session()->get('step5');
-
         $campaign = Campaign::where("user_id", Auth::user()->id)->first();
-        $campaign->visible = 0;
-        $campaign->donation_user = $step1["pasien"];
-        $campaign->user_phone = $step2["user_phone"];
-        $campaign->patient_phone = $step2["patient_phone"];
-        $campaign->patient_name = $step2["patient_name"];
-        $campaign->patient_diagnose = $step2["patient_diagnose"];
-        $campaign->inpatient = $step3["inpatient"];
-        $campaign->hospital = $step3["hospital"];
-        $campaign->effort = $step3["effort"];
-        $campaign->resource = $step3["resource"];
-        $campaign->donation_duration = $step4["donation_duration"];
-        $campaign->donation_amount = $step4["donation_amount"];
-        $campaign->donation_detail = $step4["donation_detail"];
-        $campaign->donation_title = $step5["donation_title"];
-        $campaign->donation_slug = Str::slug($step5["donation_title"]);
-        $campaign->donation_story = $step5["donation_story"];
-        $campaign->donation_support = $step5["donation_support"];
-        $campaign->update();
+        $this->photoService->updateCampaign($campaign, $request);
         $request->session()->forget(["step1", "step2", "step3", "step4", "Step5"]);
         return redirect("/");
     }
