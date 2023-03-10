@@ -5,9 +5,12 @@
     <div class="text-center">
         <p class="text-[32px] font-semibold">Bantuan Medis dan Kesehatan.</p>
         <p class="text-[20px] font-light mt-6">Judul Campaign</p>
-        <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700 mt-2">
-            <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
-                style="width: 70%"> 70%</div>
+        <div class="flex justify-between mb-1 mt-6">
+            <span class="text-base font-medium text-blue-700 dark:text-white">Status Pasien</span>
+            <span class="text-sm font-medium text-blue-700 dark:text-white">{{ Session::has("progress")? Session::get("progress")["data"]: "0"}}%</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+            <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ Session::has("progress")? Session::get("progress")["data"]: "0"}}%"></div>
         </div>
     </div>
 
@@ -51,10 +54,13 @@
             <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX.
                 800x400px).</p>
             </div>
+            @if (isset($temp->donation_photo))
+                <img class="h-auto max-w-full mb-5" src="{{ $temp->donation_photo }}" alt="image description">
+            @endif
 
         <div class="flex justify-between">
             <a href="{{ route("step4.medical.targetdonasi") }}"
-                class="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800">Sebelumnya</a>
+                class="text-black bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800">Sebelumnya</a>
             <button type="submit"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Selanjutnya</button>
         </div>

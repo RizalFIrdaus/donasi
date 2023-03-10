@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginFormRequest;
 use App\Http\Requests\RegisterFormRequest;
+use App\Models\tempCampaign;
 use App\Service\AuthService;
+use App\Service\PhotoService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
 
-    public function __construct(private AuthService $authService)
+    public function __construct(private AuthService $authService, private PhotoService $photoService)
     {
     }
 
@@ -45,6 +47,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        $this->photoService->deleteTempCampaign();
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
