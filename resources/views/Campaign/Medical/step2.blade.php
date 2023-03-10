@@ -5,11 +5,11 @@
     <div class="text-center">
         <p class="text-[32px] font-semibold">Bantuan Medis dan Kesehatan.</p>
         <div class="flex justify-between mb-1 mt-6">
-            <span class="text-base font-medium text-blue-700 dark:text-white">Status Pasien</span>
+            <span class="text-base font-medium text-blue-700 dark:text-white">Data Pasien</span>
             <span class="text-sm font-medium text-blue-700 dark:text-white">{{ Session::has("progress")? Session::get("progress")["data"]: "0"}}%</span>
         </div>
-        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-            <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ Session::has("progress")? Session::get("progress")["data"]: "0"}}%"></div>
+        <div class="w-full bg-gray-200 rounded-full h-4 dark:bg-gray-700">
+            <div class="bg-blue-600 h-4 rounded-full" style="width: {{ Session::has("progress")? Session::get("progress")["data"]: "0"}}%"></div>
         </div>
     </div>
 

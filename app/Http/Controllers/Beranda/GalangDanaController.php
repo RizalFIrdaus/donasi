@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Service\PhotoService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StepOneRequest;
+use App\Http\Requests\StepTwoRequest;
 use App\Service\GalangDanaService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -28,7 +29,10 @@ class GalangDanaController extends Controller
     public function storeStep1(StepOneRequest $request)
     {
         $this->galangDanaService->startProgress($request);
-        $this->galangDanaService->updateProgress($request, $this->galangDanaService->progress(1, 17));
+        $this->galangDanaService->updateProgress(
+            $request,
+            $this->galangDanaService->progress(1, 17)
+        );
         $request->session()->put('step1', [
             "pasien" => $request->input("pasien")
         ]);
@@ -41,23 +45,13 @@ class GalangDanaController extends Controller
         return view("Campaign.Medical.step2", compact("step1"));
     }
 
-    public function storeStep2(Request $request)
+    public function storeStep2(StepTwoRequest $request)
     {
-        $request->validate([
-            "user_phone" => "required",
-            "patient_name" => "required|string|min:3|max:42",
-            "patient_diagnose" => "required",
-        ]);
-        $regex = "#^(^\+62\s?|^0)(\d{3,4}-?){2}\d{3,4}$#";
-
         if (Session::has("step1") && Session::get("step1")["pasien"] == "4") {
-            if (!preg_match($regex,  $request->input("patient_phone"))) {
-                return redirect()->back()->withErrors(['patient_phone' => 'Nomor telepon tidak valid']);
-            }
+            $this->galangDanaService->validationPhone($request, "patient_phone");
         }
-
-        if (!preg_match($regex,  $request->input("user_phone"))) {
-            return redirect()->back()->withErrors(['user_phone' => 'Nomor telepon tidak valid']);
+        if ($this->galangDanaService->validationPhone($request, "user_phone")) {
+            return redirect()->back()->withErrors(["user_phone" => 'Nomor telepon tidak valid']);
         }
 
         $request->session()->put('step2', [
@@ -66,11 +60,12 @@ class GalangDanaController extends Controller
             "patient_name" => $request->input("patient_name"),
             "patient_diagnose" => $request->input("patient_diagnose"),
         ]);
-        $progress = ceil((4 / 17) * 100);
 
-        if ($progress >= $request->session()->get("progress")["data"]) {
-            $request->session()->put('progress', ["data" => $progress]);
-        }
+        $this->galangDanaService->updateProgress(
+            $request,
+            $this->galangDanaService->progress(4, 17)
+        );
+
         return redirect()->route('step3.medical.riwayatmedis');
     }
 

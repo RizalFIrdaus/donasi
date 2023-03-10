@@ -25,4 +25,12 @@ class GalangDanaServiceImp implements GalangDanaService
     {
         return ceil(($progress / $total) * 100);
     }
+
+    public function validationPhone(Request $request, string $field)
+    {
+        $regex = "#^(^\+62\s?|^0)(\d{3,4}-?){2}\d{3,4}$#";
+        if (!preg_match($regex,  $request->input($field))) {
+            return true;
+        }
+    }
 }
