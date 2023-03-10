@@ -197,6 +197,7 @@ return [
         App\Providers\AuthProvider::class,
         App\Providers\AccountProvider::class,
         App\Providers\StorePhotoProvider::class,
+        App\Providers\GalangDanaProvider::class,
 
     ],
 

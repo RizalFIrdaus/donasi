@@ -8,36 +8,27 @@ use App\Models\tempCampaign;
 use Illuminate\Http\Request;
 use App\Service\PhotoService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StepOneRequest;
+use App\Service\GalangDanaService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class GalangDanaController extends Controller
 {
 
-    public function __construct(private PhotoService $photoService)
+    public function __construct(private PhotoService $photoService, private GalangDanaService $galangDanaService)
     {
     }
-    public function step1(Request $request)
+    public function step1()
     {
 
         return view("Campaign.Medical.step1");
     }
 
-    public function storeStep1(Request $request)
+    public function storeStep1(StepOneRequest $request)
     {
-        $request->validate([
-            "pasien" => "required"
-        ]);
-
-        if ($request->session()->has("progress") == false) {
-            $request->session()->put('progress', ["data" => 0]);
-        }
-
-        $progress = ceil((1 / 17) * 100);
-        if ($progress >= $request->session()->get("progress")["data"]) {
-            $request->session()->put('progress', ["data" => $progress]);
-        }
-
+        $this->galangDanaService->startProgress($request);
+        $this->galangDanaService->updateProgress($request, $this->galangDanaService->progress(1, 17));
         $request->session()->put('step1', [
             "pasien" => $request->input("pasien")
         ]);
@@ -54,7 +45,7 @@ class GalangDanaController extends Controller
     {
         $request->validate([
             "user_phone" => "required",
-            "patient_name" => "required|string",
+            "patient_name" => "required|string|min:3|max:42",
             "patient_diagnose" => "required",
         ]);
         $regex = "#^(^\+62\s?|^0)(\d{3,4}-?){2}\d{3,4}$#";
