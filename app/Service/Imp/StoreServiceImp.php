@@ -96,4 +96,20 @@ class StoreServiceImp implements PhotoService
         if (isset($temp))
             $temp->delete();
     }
+
+    public function storeTemp(Request $request)
+    {
+        $campaign = tempCampaign::where("user_id", Auth::user()->id)->first();
+        if (!$campaign) {
+            $campaign = new tempCampaign();
+            $campaign->user_id = Auth::user()->id;
+        }
+        $this->storePhoto($request, $campaign, "donation_photo");
+        if (!tempCampaign::where("user_id", Auth::user()->id)->first()) {
+            $campaign->save();
+        } else {
+            $campaign->update();
+        }
+        $campaign->save();
+    }
 }

@@ -145,14 +145,14 @@
             </div>
             <div>
                 <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Foto Campaign</h5>
-               <img class="h-auto max-w-full" src="{{$campaign->donation_photo}}" alt="image description">
+               <img class="h-auto max-w-full" src="{{ isset($temp->donation_photo)?$temp->donation_photo : asset("img/donation_default.jpg") }}" alt="image description">
             </div>
             
         </div>
         <div class="flex justify-end">
             <form action="{{ route("post.review.medical") }}" method="POST">
                 @csrf
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Ya, sudah sesuai</button>
+                <button type="submit" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Ya, sudah sesuai</button>
             </form>
         </div>
 

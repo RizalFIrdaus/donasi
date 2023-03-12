@@ -34,9 +34,9 @@ class StepThreeRequest extends FormRequest
         return [
             'inpatient.required' => 'Status rawat inap wajib diisi.',
             'hospital.required' => 'Nama rumah sakit wajib diisi.',
-            'effort.required' => 'Usaha yang dilakukan wajib diisi.',
-            'effort.regex' => 'Usaha yang dilakukan harus memiliki minimal 12 kata.',
-            'resource.required' => 'Sumber daya yang digunakan wajib diisi.'
+            'effort.required' => 'Upaya pengobatan ini wajib diisi.',
+            'effort.regex' => 'Upaya pengobatan ini harus memiliki minimal 12 kata.',
+            'resource.required' => 'Sumber biaya yang digunakan wajib diisi.'
         ];
     }
 }

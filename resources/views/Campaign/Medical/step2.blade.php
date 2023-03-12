@@ -27,25 +27,25 @@
     <div class="mb-6">
         <label for="user_phone" class="block  text-sm font-medium text-gray-900 dark:text-white">Nomor Ponsel Kamu</label>
          <p class="font-light text-sm text-slate-600 mb-2">Pastikan aktif untuk sms.</p>
-        <input type="text" name="user_phone" id="user_phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Contoh : 082113872314" value="{{ Session::has("step2")? Session::get("step2")["user_phone"]:""}}" >
+        <input type="text" name="user_phone" id="user_phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Contoh : 082113872314" value="{{ Session::has("step2")? Session::get("step2")["user_phone"]:""}}{{ old("user_phone") }}" >
     </div>
     @if (Session::has("step1")&&Session::get("step1")["pasien"]=="4")
     <div class="mb-6">
         <label for="patient_phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Ponsel Pasien</label>
         <p class="font-light text-sm text-slate-600 mb-2">Pastikan aktif untuk sms.</p>
-        <input type="text" name="patient_phone" id="patient_phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Contoh : 082113872314" value="{{ Session::has("step2")? Session::get("step2")["patient_phone"]:""}}" >
+        <input type="text" name="patient_phone" id="patient_phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Contoh : 082113872314" value="{{ Session::has("step2")? Session::get("step2")["patient_phone"]:""}}{{ old("patient_phone") }}" >
     </div>
     @endif
   
     <div class="mb-6">
         <label for="patient_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pasien</label>
         <p class="font-light text-sm text-slate-600 mb-2">Nama yang dimasukan sesuai dengan KTP/Dokumen Medis.</p>
-        <input type="text" name="patient_name" id="patient_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Contoh: Adit Suteja" value="{{ Session::has("step2")? Session::get("step2")["patient_name"]:""}}" >
+        <input type="text" name="patient_name" id="patient_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Contoh: Adit Suteja" value="{{ Session::has("step2")? Session::get("step2")["patient_name"]:""}}{{ old("patient_name") }}" >
     </div>
     <div class="mb-6">
         <label for="patient_diagnose" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Penyakit atau kondisi yang tertera</label>
         <p class="font-light text-sm text-slate-600 mb-2">Pastikan sesuai dengan hasil dokumen medis.</p>
-        <input type="text" name="patient_diagnose" id="patient_diagnose" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Contoh: Penyakit TBC" value="{{ Session::has("step2")? Session::get("step2")["patient_diagnose"]:""}}" >
+        <input type="text" name="patient_diagnose" id="patient_diagnose" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Contoh: Penyakit TBC" value="{{ Session::has("step2")? Session::get("step2")["patient_diagnose"]:""}}{{ old("patient_diagnose") }}" >
     </div>
     <div class="flex justify-between">
     

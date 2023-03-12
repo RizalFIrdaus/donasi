@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Akun\ProfileController;
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Beranda\MedicalGalangDanaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,11 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::post('/user/profil', [ProfileController::class, 'updateProfile']);
     Route::post('/user/account/email', [ProfileController::class, 'updateEmail']);
     Route::post('/user/account/password', [ProfileController::class, 'updatePassword']);
+    Route::apiResource('/campaign', MedicalGalangDanaController::class);
+    // Route::controller(MedicalGalangDanaController::class)->group(function () {
+    //     Route::get('/campaign', 'index');
+    //     Route::get('/campaign/{id}', 'show');
+    // });
 });
 
 Route::post('/user/register', [AuthController::class, 'Register']);

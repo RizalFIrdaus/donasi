@@ -8,7 +8,10 @@ use App\Models\tempCampaign;
 use Illuminate\Http\Request;
 use App\Service\PhotoService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StepFiveRequest;
+use App\Http\Requests\StepFourRequest;
 use App\Http\Requests\StepOneRequest;
+use App\Http\Requests\StepThreeRequest;
 use App\Http\Requests\StepTwoRequest;
 use App\Service\GalangDanaService;
 use Illuminate\Support\Facades\Auth;
@@ -77,14 +80,8 @@ class GalangDanaController extends Controller
         return view("Campaign.Medical.step3", compact("step1", "step2"));
     }
 
-    public function storeStep3(Request $request)
+    public function storeStep3(StepThreeRequest $request)
     {
-        $request->validate([
-            "inpatient" => "required",
-            "hospital" => "required",
-            "effort" => "required",
-            "resource" => "required",
-        ]);
 
         $request->session()->put('step3', [
             "inpatient" => $request->input("inpatient"),
@@ -92,10 +89,10 @@ class GalangDanaController extends Controller
             "effort" => $request->input("effort"),
             "resource" => $request->input("resource"),
         ]);
-        $progress = ceil((9 / 17) * 100);
-        if ($progress >= $request->session()->get("progress")["data"]) {
-            $request->session()->put('progress', ["data" => $progress]);
-        }
+        $this->galangDanaService->updateProgress(
+            $request,
+            $this->galangDanaService->progress(9, 17)
+        );
         return redirect()->route('step4.medical.targetdonasi');
     }
 
@@ -108,23 +105,17 @@ class GalangDanaController extends Controller
         return view("Campaign.Medical.step4", compact("step1", "step2", "step3"));
     }
 
-    public function storeStep4(Request $request)
+    public function storeStep4(StepFourRequest $request)
     {
-        $request->validate([
-            "donation_duration" => "required",
-            "donation_amount" => "required",
-            "donation_detail" => "required",
-        ]);
-
         $request->session()->put('step4', [
             "donation_duration" => $request->input("donation_duration"),
             "donation_amount" => $request->input("donation_amount"),
             "donation_detail" => $request->input("donation_detail"),
         ]);
-        $progress = ceil((12 / 17) * 100);
-        if ($progress >= $request->session()->get("progress")["data"]) {
-            $request->session()->put('progress', ["data" => $progress]);
-        }
+        $this->galangDanaService->updateProgress(
+            $request,
+            $this->galangDanaService->progress(12, 17)
+        );
         return redirect()->route('step5.medical.judul');
     }
 
@@ -138,27 +129,9 @@ class GalangDanaController extends Controller
         return view("Campaign.Medical.step5", compact("step1", "step2", "step3", "step4", "temp"));
     }
 
-    public function storeStep5(Request $request)
+    public function storeStep5(StepFiveRequest $request)
     {
-        $request->validate([
-            "donation_title" => "required",
-            "donation_story" => "required",
-            "donation_support" => "required",
-        ]);
-
-
-        $campaign = tempCampaign::where("user_id", Auth::user()->id)->first();
-        if (!$campaign) {
-            $campaign = new tempCampaign();
-            $campaign->user_id = Auth::user()->id;
-        }
-        $this->photoService->storePhoto($request, $campaign, "donation_photo");
-        if (!tempCampaign::where("user_id", Auth::user()->id)->first()) {
-            $campaign->save();
-        } else {
-            $campaign->update();
-        }
-        $campaign->save();
+        $this->photoService->storeTemp($request);
         return redirect()->route('review.medical');
     }
 
@@ -169,10 +142,10 @@ class GalangDanaController extends Controller
         $step3 = $request->session()->get('step3');
         $step4 = $request->session()->get('step4');
         $step5 = $request->session()->get('step5');
-        $campaign = tempCampaign::where("user_id", Auth::user()->id)->first();
+        $temp = tempCampaign::where("user_id", Auth::user()->id)->first();
 
 
-        return view("Campaign.Medical.review", compact("step1", "step2", "step3", "step4", "step5", "campaign"));
+        return view("Campaign.Medical.review", compact("step1", "step2", "step3", "step4", "step5", "temp"));
     }
 
 
