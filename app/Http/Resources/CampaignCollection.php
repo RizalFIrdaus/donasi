@@ -13,15 +13,15 @@ class CampaignCollection extends ResourceCollection
      * @return array<int|string, mixed>
      */
 
-    public function __construct(private $status, private $message, $resource)
+    public function __construct(private $message, $collection)
     {
-        parent::__construct($resource);
+        parent::__construct($collection);
     }
 
     public function toArray(Request $request): array
     {
         return [
-            "status" => $this->status,
+            "status" => true,
             "message" => $this->message,
             "data" => $this->collection
         ];

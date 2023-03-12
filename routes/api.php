@@ -27,10 +27,6 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::post('/user/account/email', [ProfileController::class, 'updateEmail']);
     Route::post('/user/account/password', [ProfileController::class, 'updatePassword']);
     Route::apiResource('/campaign', MedicalGalangDanaController::class);
-    // Route::controller(MedicalGalangDanaController::class)->group(function () {
-    //     Route::get('/campaign', 'index');
-    //     Route::get('/campaign/{id}', 'show');
-    // });
 });
 
 Route::post('/user/register', [AuthController::class, 'Register']);

@@ -12,4 +12,5 @@ interface PhotoService
     public function getSession(Request $request): array;
     public function storeTemp(Request $request);
     public function deleteTempCampaign();
+    public function apiStorePhoto(Request $request, $obj, $name);
 }

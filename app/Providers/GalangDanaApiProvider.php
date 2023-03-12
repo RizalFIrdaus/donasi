@@ -2,21 +2,19 @@
 
 namespace App\Providers;
 
-use App\Service\Api\imp\MedicalGalangServiceImp;
-use App\Service\Api\MedicalGalangService;
-use App\Service\Imp\StoreServiceImp;
-use App\Service\PhotoService;
-use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
+use App\Service\Api\MedicalGalangService;
+use App\Service\Api\imp\MedicalGalangServiceImp;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
-class StorePhotoProvider extends ServiceProvider implements DeferrableProvider
+class GalangDanaApiProvider extends ServiceProvider implements DeferrableProvider
 {
     public array $singletons = [
-        PhotoService::class => StoreServiceImp::class
+        MedicalGalangService::class => MedicalGalangServiceImp::class
     ];
     public function provides(): array
     {
-        return [PhotoService::class, MedicalGalangService::class];
+        return [MedicalGalangService::class];
     }
     /**
      * Register services.
