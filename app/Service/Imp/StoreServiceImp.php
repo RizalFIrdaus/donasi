@@ -51,6 +51,7 @@ class StoreServiceImp implements PhotoService
         $getSession = $this->getSession($request);
 
         $campaign->user_id = Auth::user()->id;
+        $campaign->review = 0;
         $campaign->visible = 0;
         $campaign->donation_user = $getSession["step1"]["pasien"];
         $campaign->user_phone = $getSession["step2"]["user_phone"];

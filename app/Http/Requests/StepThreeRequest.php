@@ -24,7 +24,7 @@ class StepThreeRequest extends FormRequest
         return [
             "inpatient" => "required",
             "hospital" => "required",
-            "effort" => "required|regex:/\b\w{1,}\b(?:\s+\b\w{1,}\b){11,}/",
+            "effort" => "required|min:12",
             "resource" => "required",
         ];
     }
@@ -35,7 +35,7 @@ class StepThreeRequest extends FormRequest
             'inpatient.required' => 'Status rawat inap wajib diisi.',
             'hospital.required' => 'Nama rumah sakit wajib diisi.',
             'effort.required' => 'Upaya pengobatan ini wajib diisi.',
-            'effort.regex' => 'Upaya pengobatan ini harus memiliki minimal 12 kata.',
+            'effort.min' => 'Upaya pengobatan ini harus memiliki minimal 12 karakter.',
             'resource.required' => 'Sumber biaya yang digunakan wajib diisi.'
         ];
     }

@@ -38,6 +38,7 @@ class MedicalGalangServiceImp implements MedicalGalangService
         $campaign = new Campaign();
         $campaign->donation_user = $request->input("pasien");
         $campaign->user_id = $request->user()->id;
+        $campaign->review = 0;
         $campaign->visible = 0;
         $campaign->user_phone =  $request->input("user_phone");
         $campaign->patient_name =  $request->input("patient_name");

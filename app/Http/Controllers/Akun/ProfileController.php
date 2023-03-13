@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileFormRequest;
 use App\Http\Requests\PasswordFormRequest;
+use App\Models\Campaign;
 
 class ProfileController extends Controller
 {
@@ -80,5 +81,13 @@ class ProfileController extends Controller
             return redirect()->back()->withErrors(["error" => "Password baru kamu tidak cocok dengan pengulangan password baru mu"]);
         }
         return redirect()->back()->withErrors(["error" => "Password kamu salah"]);
+    }
+
+    public function campaign()
+    {
+        $campaigns_na = Campaign::where("user_id", Auth::user()->id)->where("review", 0)->where("visible", 0)->get();
+        $campaigns_a = Campaign::where("user_id", Auth::user()->id)->where("review", 1)->where("visible", 1)->get();
+        $campaigns_r = Campaign::where("user_id", Auth::user()->id)->where("review", 1)->where("visible", 0)->get();
+        return view("Akun.campaign", compact("campaigns_na", "campaigns_a", "campaigns_r"));
     }
 }

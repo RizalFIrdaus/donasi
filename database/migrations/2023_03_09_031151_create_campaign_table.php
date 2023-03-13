@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("user_id");
             $table->string("visible");
+            $table->string("review");
             $table->string("donation_user");
             $table->string("user_phone");
             $table->string("patient_phone")->nullable();
