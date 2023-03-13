@@ -13,6 +13,7 @@ class Campaign extends Model
         "user_id",
         "donation_user",
         "user_phone",
+        "review",
         "patient_phone",
         "patient_name",
         "patient_diagnose",

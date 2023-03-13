@@ -60,7 +60,6 @@
             @if (isset($temp->donation_photo))
                 <img class="h-auto max-w-full mb-5" src="{{ isset($temp->donation_photo)?$temp->donation_photo : asset("img/donation_default.jpg") }}" alt="image description">
             @endif
-
         <div class="flex justify-between">
             <a href="{{ route("step4.medical.targetdonasi") }}" class="text-slate-600 hover:text-white border border-slate-400 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-slate-600 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-600 dark:focus:ring-slate-800">Sebelumnya</a>
 

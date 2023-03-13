@@ -46,6 +46,9 @@ Route::prefix("/user")->middleware("auth")->group(function () {
         Route::get("account/password", "password")->name("change-password");
         Route::post("account/password", "updatePassword")->name("update-password");
         Route::get("campaign", "campaign")->name("campaign-profile");
+        Route::post("campaign/review/{id}", "campaignReview")->name("campaign-review");
+        Route::post("campaign/active/{id}", "campaignActive")->name("campaign-active");
+        Route::post("campaign/delete/{id}", "campaignDelete")->name("campaign-delete");
     });
     Route::post("logout", [AuthController::class, "logout"])->name("logout");
 });

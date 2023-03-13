@@ -90,4 +90,41 @@ class ProfileController extends Controller
         $campaigns_r = Campaign::where("user_id", Auth::user()->id)->where("review", 1)->where("visible", 0)->get();
         return view("Akun.campaign", compact("campaigns_na", "campaigns_a", "campaigns_r"));
     }
+
+    public function campaignReview($id)
+    {
+        $campaign = Campaign::where("user_id", Auth::user()->id)->where("id", $id)->first();
+        $exist = Campaign::where("user_id", Auth::user()->id)->where("visible", 1)->exists();
+        if ($exist) {
+            return redirect()->back()->withErrors("Kamu hanya bisa membuat 1 campaign yang aktif !");
+        } else {
+            if (!$campaign) {
+                return redirect()->back()->withErrors("Campaign tidak ada !");
+            }
+            $campaign->review = 1;
+            $campaign->update();
+            return redirect()->back();
+        }
+    }
+
+    public function campaignActive($id)
+    {
+        $campaign = Campaign::where("user_id", Auth::user()->id)->where("review", 1)->where("visible", 0)->where("id", $id)->first();
+        if (!$campaign) {
+            return redirect()->back()->withErrors(["message" => "Campaign not found!"]);
+        }
+        $campaign->review = 0;
+        $campaign->update();
+        return redirect()->back();
+    }
+
+    public function campaignDelete($id)
+    {
+        $campaign = Campaign::where("user_id", Auth::user()->id)->where("review", 0)->where("visible", 0)->where("id", $id)->first();
+        if (!$campaign) {
+            return redirect()->back()->withErrors(["message" => "Campaign not found!"]);
+        }
+        $campaign->delete();
+        return redirect()->back();
+    }
 }

@@ -29,6 +29,7 @@ class StepFiveRequest extends FormRequest
         ];
     }
 
+
     public function messages(): array
     {
         return [
@@ -38,9 +39,9 @@ class StepFiveRequest extends FormRequest
             "donation_story.min" => "Minimal 100 karakter.",
             "donation_support.required" => "Ajakan campaign harus diisi.",
             "donation_support.min" => "Minimal 32 karakter.",
-            'photo.file' => 'File yang diunggah harus berupa gambar.',
-            'photo.mimes' => 'Format gambar harus JPG, JPEG, atau PNG.',
-            'photo.max' => 'Ukuran gambar maksimum adalah 1MB.',
+            'donation_photo.file' => 'File yang diunggah harus berupa gambar.',
+            'donation_photo.mimes' => 'Format gambar harus JPG, JPEG, atau PNG.',
+            'donation_photo.max' => 'Ukuran gambar maksimum adalah 1MB.',
         ];
     }
 }

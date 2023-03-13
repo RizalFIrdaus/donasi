@@ -23,8 +23,10 @@ class StoreServiceImp implements PhotoService
             $bucket = $storage->bucket("donasi-a8c3d.appspot.com");
             $fileContent = file_get_contents($request->file($name)->getPathname());
             $objectName = uniqid() . "." . $request->file($name)->getClientOriginalName();
-            if ($obj->donation_photo) {
-                $bucket->object('campaign/medical/' . $obj->donation_photo_file)->delete();
+            if (!$obj->donation_photo_file == "donation_default.jpg") {
+                if ($obj->donation_photo) {
+                    $bucket->object('campaign/medical/' . $obj->donation_photo_file)->delete();
+                }
             }
             $object = $bucket->upload($fileContent, [
                 'name' => 'campaign/medical/' . $objectName
@@ -42,6 +44,18 @@ class StoreServiceImp implements PhotoService
                 "donation_photo" => $obj->donation_photo,
                 "donation_photo_file" => $objectName
             ]);
+        } else {
+            if (!$obj->donation_photo) {
+                $obj->donation_photo = asset("img/donation_default.jpg");
+                $obj->donation_photo_file = "donation_default.jpg";
+                $request->session()->put('step5', [
+                    "donation_title" => $request->input("donation_title"),
+                    "donation_story" => $request->input("donation_story"),
+                    "donation_support" => $request->input("donation_support"),
+                    "donation_photo" => $obj->donation_photo,
+                    "donation_photo_file" => $obj->donation_photo_file
+                ]);
+            }
         }
     }
 
