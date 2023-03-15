@@ -20,6 +20,8 @@ use App\Http\Controllers\Beranda\GalangDanaController;
 Route::controller(DonasiController::class)->group(function () {
     Route::get("/", "index");
     Route::get("/campaign", "galangdana")->name("galang-dana")->middleware("auth");
+    Route::get("/donation", "donasi")->name("donasi");
+    Route::get("/donation/{slug}", "detail")->name("donasi.detail");
 });
 
 Route::prefix("/campaign/medical")->controller(GalangDanaController::class)->middleware("auth")->group(function () {

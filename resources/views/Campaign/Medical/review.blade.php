@@ -7,7 +7,7 @@
         <p class="text-[20px] font-light mt-2 mb-6">Harap di cek kembali data yang anda masukkan</p>
     </div>
     <div class="flex flex-col gap-4 flex-wrap justify-center items-center">
-        <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full">
+        <div class="block max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full">
             <div class="flex justify-between">
                 <div>
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-teal-500 dark:text-white">Status pasien </h5>
@@ -31,7 +31,7 @@
             </p>
         </div>
 
-        <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full">
+        <div class="block max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full">
             <div class="flex justify-between">
                 <div>
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-teal-500 dark:text-white">Data pasien </h5>
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full">
+        <div class="block max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full">
             <div class="flex justify-between">
                 <div>
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-teal-500 dark:text-white">Riwayat Medis </h5>
@@ -94,7 +94,7 @@
             </div>
         </div>
 
-        <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full">
+        <div class="block max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full">
             <div class="flex justify-between">
                 <div>
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-teal-500 dark:text-white">Target Donasi</h5>
@@ -119,7 +119,7 @@
             </div>
         </div>
 
-        <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full">
+        <div class="block max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full">
             <div class="flex justify-between">
                 <div>
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-teal-500 dark:text-white">Judul Campaign</h5>

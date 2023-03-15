@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Profile;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Campaign extends Model
 {
@@ -31,4 +32,9 @@ class Campaign extends Model
         "donation_photo",
         "donation_photo_file"
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(Profile::class, 'user_id', 'user_id');
+    }
 }
