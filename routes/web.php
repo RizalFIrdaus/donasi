@@ -41,6 +41,9 @@ Route::prefix("/campaign/medical")->controller(GalangDanaController::class)->mid
 Route::prefix("/user")->middleware("auth")->group(function () {
     Route::controller(ProfileController::class)->group(function () {
         Route::get("profil", "profile")->name("change-profile");
+        Route::get("wallet", "dompet")->name("dompet");
+        Route::get("checkout", "bayar")->name("bayar");
+        Route::post("checkout", "checkout")->name("checkout");
         Route::post("profil", "updateProfile")->name("update-profile");
         Route::get("account", "account")->name("change-personal-account");
         Route::get("account/email", "email")->name("change-email");

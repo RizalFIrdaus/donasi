@@ -13,11 +13,14 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileFormRequest;
 use App\Http\Requests\PasswordFormRequest;
 use App\Models\Campaign;
+use App\Models\Payment;
+use App\Models\Wallet;
+use App\Service\PaymentService;
 
 class ProfileController extends Controller
 {
 
-    public function __construct(private ProfileService $profile)
+    public function __construct(private ProfileService $profile, private PaymentService $payment)
     {
     }
     public function profile()
@@ -30,6 +33,13 @@ class ProfileController extends Controller
     public function updateProfile(ProfileFormRequest $request)
     {
         $this->profile->storeProfile($request);
+        $profile = Profile::where("user_id", Auth::user()->id)->first();
+        if (!Wallet::where("profile_id", $profile->id)->exists()) {
+            Wallet::create([
+                "profile_id" => $profile->id,
+                "wallet" => 0
+            ]);
+        }
         return redirect()->back()->with("message", "Profil berhasil diubah");
     }
 
@@ -41,6 +51,30 @@ class ProfileController extends Controller
     {
         return view("Akun.email");
     }
+    public function dompet()
+    {
+        $profile = Profile::where("user_id", Auth::user()->id)->first();
+        if (!$profile) {
+            return redirect()->route("change-profile")->withErrors(["error" => "Lengkapi data kamu terlebih dahulu"]);
+        }
+        return view("Akun.dompet", compact("profile"));
+    }
+    public function bayar()
+    {
+        $profile = Profile::where("user_id", Auth::user()->id)->first();
+        return view("Akun.checkout", compact("profile"));
+    }
+    public function checkout(Request $request)
+    {
+        $profile = Profile::where("user_id", Auth::user()->id)->first();
+        $wallet_id = $profile->wallet->id;
+        $payment = Payment::where("wallet_id", $wallet_id)->where("status", "unpaid")->first();
+        $snapToken = $this->payment->createSnapToken($profile, $request);
+        return view("Akun.checkout", compact("profile", "snapToken"));
+    }
+
+
+
 
     public function updateEmail(Request $request)
     {

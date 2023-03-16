@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\Akun;
 
 use App\Models\User;
+use App\Models\Payment;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Service\ProfileService;
 use App\Http\Controllers\Controller;
@@ -22,6 +24,19 @@ class ProfileController extends Controller
             "status" => "success",
             "message" => "Profil berhasil diubah"
         ]);
+    }
+    public function payment_callback(Request $request)
+    {
+        $serverKey = config("midtrans.server_key");
+        $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
+        $payment = Payment::where("order_id", $request->order_id)->first();
+        if ($hashed == $request->signature_key) {
+            if ($request->transaction_status == "capture" || $request->transaction_status == "settlement") {
+                $payment = Payment::where("order_id", $request->order_id)->first();
+                $payment->update(["status" => "paid"]);
+                $payment->wallet->update(["wallet" => $payment->wallet->wallet + $request->gross_amount]);
+            }
+        }
     }
 
     public function updateEmail(Request $request)
@@ -44,6 +59,7 @@ class ProfileController extends Controller
         }
         return response()->error("Email baru yang kamu masukkan sudah dipakai", 400);
     }
+
 
     public function updatePassword(PasswordFormRequest $request)
     {

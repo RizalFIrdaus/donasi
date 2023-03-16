@@ -7,6 +7,9 @@
     <title>Donasi</title>
     @vite('resources/css/app.css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
+    <script type="text/javascript"
+    src="https://app.sandbox.midtrans.com/snap/snap.js"
+    data-client-key="{{ config("midtrans.client_key") }}"></script>
 </head>
 <body>
     @include('Layouts.header')
@@ -21,7 +24,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
-
+    
     @stack('scripts')
 </body>
 </html>

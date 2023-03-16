@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Wallet;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Profile extends Model
 {
@@ -20,4 +21,9 @@ class Profile extends Model
         "address",
         "description",
     ];
+
+    public function wallet()
+    {
+        return $this->belongsTo(Wallet::class, 'id', 'profile_id');
+    }
 }

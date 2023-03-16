@@ -28,6 +28,7 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::post('/user/account/password', [ProfileController::class, 'updatePassword']);
     Route::apiResource('/campaign', MedicalGalangDanaController::class);
 });
+Route::post("/midtrans-callback", [ProfileController::class, "payment_callback"])->name("payment");
 
 Route::post('/user/register', [AuthController::class, 'Register']);
 Route::post('/user/login', [AuthController::class, 'Login']);

@@ -199,6 +199,7 @@ return [
         App\Providers\StorePhotoProvider::class,
         App\Providers\GalangDanaProvider::class,
         App\Providers\GalangDanaApiProvider::class,
+        App\Providers\PaymentService::class,
 
     ],
 
