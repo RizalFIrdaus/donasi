@@ -18,8 +18,8 @@
             </div>
           </div>
      @endif
-     <p>Rp {{ number_format($profile->wallet->payment->amount,0,',',',') }}</p>
-     <button id="pay-button" type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Bayar</button>
+     <p>Rp {{ number_format($snapToken["payment"]["amount"],0,',',',') }}</p>
+     <button id="pay-button" type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Pilih metode pembayaran</button>
     </div>
 @push('scripts')
 <script>
@@ -27,7 +27,7 @@
  var payButton = document.getElementById('pay-button');
         payButton.addEventListener('click', function () {
           // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
-          window.snap.pay('{{ $snapToken }}', {
+          window.snap.pay("{{ $snapToken['snapToken'] }}", {
             onSuccess: function(result){
               /* You may add your own implementation here */
               window.location.href ="/user/wallet";

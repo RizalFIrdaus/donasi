@@ -5,14 +5,8 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CampaignJson extends JsonResource
+class WalletJson extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
-
     public function __construct(private $message, $json)
     {
         parent::__construct($json);
@@ -23,7 +17,6 @@ class CampaignJson extends JsonResource
             "status" => true,
             "message" => $this->message,
             "data" => $this->resource,
-            "user" => $this->user
         ];
     }
 }

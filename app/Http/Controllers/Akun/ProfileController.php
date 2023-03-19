@@ -54,26 +54,39 @@ class ProfileController extends Controller
     public function dompet()
     {
         $profile = Profile::where("user_id", Auth::user()->id)->first();
+        $payment = Payment::where("wallet_id", $profile->wallet->id)->where("status", "unpaid")->first();
         if (!$profile) {
             return redirect()->route("change-profile")->withErrors(["error" => "Lengkapi data kamu terlebih dahulu"]);
+        }
+        if (!$payment) {
+            session()->forget("snapToken");
+        }
+        if (session()->has("snapToken")) {
+            return redirect()->route("checkout");
         }
         return view("Akun.dompet", compact("profile"));
     }
     public function bayar()
     {
         $profile = Profile::where("user_id", Auth::user()->id)->first();
-        return view("Akun.checkout", compact("profile"));
+        $payment = Payment::where("wallet_id", $profile->wallet->id)->where("status", "unpaid")->first();
+        if (!session()->has("snapToken")) {
+            return back()->with('error', 'Snap Token not available');
+        }
+        $snapToken = session()->get("snapToken");
+        return view("Akun.checkout", compact("profile", "snapToken"));
     }
     public function checkout(Request $request)
     {
         $profile = Profile::where("user_id", Auth::user()->id)->first();
-        $wallet_id = $profile->wallet->id;
-        $payment = Payment::where("wallet_id", $wallet_id)->where("status", "unpaid")->first();
+        $payment = Payment::where("wallet_id", $profile->wallet->id)->where("status", "unpaid")->first();
+        if ($payment) {
+            $payment->delete();
+        }
         $snapToken = $this->payment->createSnapToken($profile, $request);
-        return view("Akun.checkout", compact("profile", "snapToken"));
+        session()->put(["snapToken" => $snapToken]);
+        return redirect()->route("bayar");
     }
-
-
 
 
     public function updateEmail(Request $request)

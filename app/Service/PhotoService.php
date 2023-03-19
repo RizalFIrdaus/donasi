@@ -13,4 +13,6 @@ interface PhotoService
     public function storeTemp(Request $request);
     public function deleteTempCampaign();
     public function apiStorePhoto(Request $request, $obj, $name);
+    public function getDurationLeft(Campaign $campaign);
+    public function allDurationLeft($campaign);
 }

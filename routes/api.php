@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\Akun\ProfileController;
-use App\Http\Controllers\Api\Auth\AuthController;
-use App\Http\Controllers\Api\Beranda\MedicalGalangDanaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Akun\WalletController;
+use App\Http\Controllers\Api\Akun\ProfileController;
+use App\Http\Controllers\Api\Beranda\MedicalGalangDanaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::post('/user/account/email', [ProfileController::class, 'updateEmail']);
     Route::post('/user/account/password', [ProfileController::class, 'updatePassword']);
     Route::apiResource('/campaign', MedicalGalangDanaController::class);
+    Route::apiResource('/wallet', WalletController::class);
 });
 Route::post("/midtrans-callback", [ProfileController::class, "payment_callback"])->name("payment");
 

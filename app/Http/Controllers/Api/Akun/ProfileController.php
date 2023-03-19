@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileFormRequest;
 use App\Http\Requests\PasswordFormRequest;
+use App\Service\PaymentService;
 
 class ProfileController extends Controller
 {
@@ -35,6 +36,9 @@ class ProfileController extends Controller
                 $payment = Payment::where("order_id", $request->order_id)->first();
                 $payment->update(["status" => "paid"]);
                 $payment->wallet->update(["wallet" => $payment->wallet->wallet + $request->gross_amount]);
+            }
+            if ($request->transaction_status == "expire" || $request->transaction_status == "cancel") {
+                session()->forget("snapToken");
             }
         }
     }

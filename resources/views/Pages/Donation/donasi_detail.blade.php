@@ -4,7 +4,7 @@
 <div class="flex flex-row px-32 justify-center">
     <div class="mr-10">
         <img class="h-[400px] w-[600px] rounded-lg" src="{{ $campaign->donation_photo }}" alt="image description">
-        <p class="font-semibold text-2xl mt-6">{{ $campaign->donation_title }}</p>
+        <p class="font-semibold text-2xl mt-6">{{ ucwords($campaign->donation_title) }}</p>
         <span
             class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Kesehatan</span>
         <span
@@ -18,7 +18,7 @@
             <span class="font-light dark:text-white">Dana terkumpul dari <span class="font-semibold text-blue-700"> Rp
                     {{ number_format($campaign->donation_amount+100000000,0,',','.') }}</span>
             </span>
-            <span class="text-2xl font-medium text-blue-700 dark:text-white">32 <span class="font-light text-sm">Hari
+            <span class="text-2xl font-medium text-blue-700 dark:text-white">{{ $duration_left }} <span class="font-light text-sm">Hari
                     Lagi</span></span>
         </div>
         <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">

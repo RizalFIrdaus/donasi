@@ -148,4 +148,23 @@ class StoreServiceImp implements PhotoService
             $obj->donation_photo_file = $objectName;
         }
     }
+
+    public function getDurationLeft(Campaign $campaign)
+    {
+        $start = $campaign->created_at;
+        $end_duration = $start->addDays($campaign->donation_duration)->format("Y-m-d");
+        $now = Carbon::now();
+        return $now->diffInDays($end_duration);
+    }
+    public function allDurationLeft($campaigns)
+    {
+        $array = [];
+        foreach ($campaigns as $campaign) {
+            $start = $campaign->created_at;
+            $end_duration = $start->addDays($campaign->donation_duration)->format("Y-m-d");
+            $now = Carbon::now();
+            $array[] = $now->diffInDays($end_duration);
+        }
+        return $array;
+    }
 }
