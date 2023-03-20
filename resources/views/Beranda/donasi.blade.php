@@ -7,10 +7,10 @@
         <p class="text-white font-normal text-[18px] w-3/4 mt-2">Salurkan bantuan anda, bantu kesembuhan para pasien ini
             dengan menyumbang mulai dari Rp 1.000</p>
     </div>
-    <div class="donation flex gap-6 w-full">
+    <div class="donation flex flex-col md:flex-row gap-6">
         @forelse($campaigns as $key =>$campaign)
             <div
-                class="w-[300px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-8">
+                class="sm:w-[300px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-8">
                 <a href="{{ url("donation/$campaign->donation_slug") }}">
                     <img class="rounded-t-lg"
                         src="{{ $campaign->donation_photo?? asset("img/donation_default.jpg") }}"
@@ -18,7 +18,7 @@
                 </a>
                 <div class="p-5">
                     <a href="{{ url("donation/$campaign->donation_slug") }}">
-                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        <h5 class="mb-2 sm:text-xl text-md font-bold tracking-tight text-gray-900 dark:text-white">
                             {{ ucwords($campaign->donation_title) }}</h5>
                     </a>
                     <div class="flex justify-between mb-1 mt-6">
@@ -26,10 +26,10 @@
                         <span class="text-sm font-medium text-blue-700 dark:text-white">{{ $duration_left[$key] }} Hari lagi</span>
                     </div>
                     <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: 20%"></div>
+                        <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ $progress[$key] }}%"></div>
                     </div>
                     <p class="mt-2 font-semibold text-gray-700 dark:text-gray-400">Rp
-                        {{ number_format($campaign->donation_amount,0,',','.') }}
+                        {{ number_format($campaign->transaction->current_amount,0,',','.') }}
                     </p>
                     <hr class="h-px my-2 w-full bg-gray-200 border-0 dark:bg-gray-700">
                     <div class="flex items-center">

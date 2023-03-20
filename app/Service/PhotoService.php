@@ -15,4 +15,6 @@ interface PhotoService
     public function apiStorePhoto(Request $request, $obj, $name);
     public function getDurationLeft(Campaign $campaign);
     public function allDurationLeft($campaign);
+    public function allProgress($campaigns);
+    public function timeline_donation($donation_user);
 }

@@ -14,7 +14,7 @@
 <body>
     @include('Layouts.header')
 
-    <div class="mt-24 px-20">
+    <div class="mt-24 md:px-20">
         @yield('app')
     </div>
 

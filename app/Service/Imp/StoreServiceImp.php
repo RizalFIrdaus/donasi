@@ -87,6 +87,7 @@ class StoreServiceImp implements PhotoService
         $campaign->donation_photo_file = $getSession["step5"]["donation_photo_file"];
         $campaign->save();
         $this->deleteTempCampaign();
+        return $campaign;
     }
 
     public function getSession(Request $request): array
@@ -164,6 +165,30 @@ class StoreServiceImp implements PhotoService
             $end_duration = $start->addDays($campaign->donation_duration)->format("Y-m-d");
             $now = Carbon::now();
             $array[] = $now->diffInDays($end_duration);
+        }
+        return $array;
+    }
+    public function allProgress($campaigns)
+    {
+        $array = [];
+        foreach ($campaigns as $campaign) {
+            $array[] = ($campaign->transaction->current_amount / $campaign->donation_amount) * 100;
+        }
+        return $array;
+    }
+
+    public function timeline_donation($donation_user)
+    {
+        $array = [];
+        foreach ($donation_user as $donation) {
+            $waktu1 = Carbon::parse($donation->created_at);
+            $waktu2 = Carbon::now();
+            $selisih = $waktu1->diff($waktu2);
+            $selisih_string = $selisih->format('%d hari, %h jam, %i menit');
+            if ($selisih->format("%d") < 60) {
+                $selisih_string = $selisih->format('%d hari');
+                $array[] = htmlspecialchars($selisih_string);
+            }
         }
         return $array;
     }

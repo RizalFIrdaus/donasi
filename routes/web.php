@@ -22,6 +22,7 @@ Route::controller(DonasiController::class)->group(function () {
     Route::get("/campaign", "galangdana")->name("galang-dana")->middleware("auth");
     Route::get("/donation", "donasi")->name("donasi");
     Route::get("/donation/{slug}", "detail")->name("donasi.detail");
+    Route::post("/donation/{slug}/send/donation", "sendDonation")->name("sendDonation");
 });
 
 Route::prefix("/campaign/medical")->controller(GalangDanaController::class)->middleware("auth")->group(function () {

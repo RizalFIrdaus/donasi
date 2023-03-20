@@ -1,13 +1,13 @@
 @extends('Layouts.app')
 
 @section('app')
-<div class="container mt-24 mx-auto px-20">
+<div class="container mt-24 mx-auto sm:px-20">
     <div class="text-center">
         <p class="text-[32px] font-semibold">Bantu orang yang membutuhkan bantuan.</p>
         <p class="text-[24px] font-normal">Hai orang #baik!</p>
         <p class="text-[20px] font-light">Kamu ingin menggalang dana untuk...</p>
     </div>
-    <div class="category-campaign flex justify-center mt-6">
+    <div class="category-campaign flex flex-col sm:flex-row gap-6 justify-center mt-6">
         <div class="mx-2">
             <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <p>

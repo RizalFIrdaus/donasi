@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Wallet;
 use App\Models\Profile;
+use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -36,5 +38,9 @@ class Campaign extends Model
     public function user()
     {
         return $this->belongsTo(Profile::class, 'user_id', 'user_id');
+    }
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class, 'id', 'campaign_id');
     }
 }

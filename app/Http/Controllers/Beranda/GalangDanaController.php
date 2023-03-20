@@ -13,6 +13,7 @@ use App\Http\Requests\StepFourRequest;
 use App\Http\Requests\StepOneRequest;
 use App\Http\Requests\StepThreeRequest;
 use App\Http\Requests\StepTwoRequest;
+use App\Models\Transaction;
 use App\Service\GalangDanaService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -152,7 +153,12 @@ class GalangDanaController extends Controller
     public function finalReview(Request $request)
     {
         $campaign = new Campaign();
-        $this->photoService->updateCampaign($campaign, $request);
+        $response = $this->photoService->updateCampaign($campaign, $request);
+        Transaction::create([
+            "campaign_id" => $response->id,
+            "done" => 0,
+            "current_amount" => 0
+        ]);
         $request->session()->forget(["step1", "step2", "step3", "step4", "step5", "progress"]);
         return redirect("/");
     }
